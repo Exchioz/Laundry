@@ -1,0 +1,66 @@
+<!-- adapter_jasa_order.xml -->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/textViewJasaNameOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="Nama Jasa"
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:id="@+id/textViewJasaPriceOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewJasaNameOrder"
+        android:layout_marginTop="4dp"
+        android:textSize="14sp"
+        android:text="Harga: Rp 0.00"
+        android:textColor="@android:color/darker_gray"/>
+
+    <Button
+        android:id="@+id/btnIncrementOrder"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_below="@id/textViewJasaPriceOrder"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:text="+"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        android:layout_alignParentEnd="true"/>
+
+    <TextView
+        android:id="@+id/textViewQuantityOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_below="@id/textViewJasaPriceOrder"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_toStartOf="@id/btnIncrementOrder"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:text="0"
+        android:textColor="@android:color/black"/>
+
+    <Button
+        android:id="@+id/btnDecrementOrder"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_below="@id/textViewJasaPriceOrder"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_toStartOf="@id/textViewQuantityOrder"
+        android:background="?android:attr/selectableItemBackground"
+        android:text="-"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"/>
+
+</RelativeLayout>
