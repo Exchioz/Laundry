@@ -58,9 +58,13 @@ public class DataHelper extends SQLiteOpenHelper {
         Log.d("data", "onCreate" + store);
         db.execSQL(store);
 
+        db.execSQL("INSERT INTO store (username, password, nama_toko, notelp_toko, email_toko, alamat_toko, info_toko, hariop_toko, waktuop_toko) " +
+                "VALUES ('admin', 'admin123', 'Toko Saya', 123456789, 'tokosaya@email.com', 'Jl. Contoh No. 123', 'Informasi tambahan', 'Senin - Jumat', '08:00 - 17:00');");
+
         String order = "create table \"order\"(id integer primary key, " +
                 "id_user integer null, " +
                 "tanggal_order text null, " +
+                "total_harga integer null, " +
                 "status text null " +
                 ");";
         Log.d("data", "onCreate" + order);
@@ -68,8 +72,10 @@ public class DataHelper extends SQLiteOpenHelper {
 
         String detail_order = "create table detail_order(id integer primary key, " +
                 "id_order integer null, " +
-                "id_jasa integer null, " +
-                "jumlah integer null " +
+                "nama_jasa text null, " +
+                "harga_jasa integer null, "+
+                "jumlah integer null, " +
+                "totaljmlh_jasa integer null " +
                 ");";
         Log.d("data", "onCreate" + detail_order);
         db.execSQL(detail_order);
@@ -81,21 +87,43 @@ public class DataHelper extends SQLiteOpenHelper {
 
     }
 
-    public void tambahPesanan(int userId, String tanggalOrder, String status, List<Jasa> jasaList, List<Integer> jumlahList) {
+    public int hitungTotalJmlhJasa(List<Jasa> jasaList, List<Integer> jumlahList) {
+        int totalJmlhJasa = 0;
+
+        for (int i = 0; i < jasaList.size(); i++) {
+            Jasa jasa = jasaList.get(i);
+            int jumlah = jumlahList.get(i);
+
+            // Jika jumlah tidak sama dengan 0, tambahkan ke total
+            if (jumlah != 0) {
+                totalJmlhJasa += jasa.getHarga() * jumlah;
+            }
+        }
+
+        return totalJmlhJasa;
+    }
+
+    public void tambahPesanan(int userId, String tanggalOrder, int total_harga, String status, List<Jasa> jasaList, List<Integer> jumlahList) {
         // Tambahkan pesanan ke tabel 'order'
-        long orderId = tambahOrder(userId, tanggalOrder, status);
+        long orderId = tambahOrder(userId, tanggalOrder, total_harga, status);
 
         // Tambahkan detail pesanan ke tabel 'detail_order' untuk setiap jasa dalam daftar
         for (int i = 0; i < jasaList.size(); i++) {
-            tambahDetailOrder(orderId, jasaList.get(i).getId(), jumlahList.get(i));
+            int jumlah = jumlahList.get(i);
+            if (jumlah != 0) {
+                Jasa jasa = jasaList.get(i);
+                int totalJmlhJasa = jasa.getHarga() * jumlah;
+                tambahDetailOrder(orderId, jasa.getNama(), jasa.getHarga(), jumlah, totalJmlhJasa);
+            }
         }
     }
 
-    public long tambahOrder(int userId, String tanggalOrder, String status) {
+    public long tambahOrder(int userId, String tanggalOrder, int total_harga, String status) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("id_user", userId);
         values.put("tanggal_order", tanggalOrder);
+        values.put("total_harga", total_harga);
         values.put("status", status);
 
         long orderId = db.insert("\"order\"", null, values);
@@ -105,17 +133,62 @@ public class DataHelper extends SQLiteOpenHelper {
         return orderId;
     }
 
-    public void tambahDetailOrder(long orderId, int jasaId, int jumlah) {
+    public void tambahDetailOrder(long orderId, String namaJasa, int hargaJasa, int jumlah, int totalJmlhJasa) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("id_order", orderId);
-        values.put("id_jasa", jasaId);
+        values.put("nama_jasa", namaJasa);
+        values.put("harga_jasa", hargaJasa);
         values.put("jumlah", jumlah);
+        values.put("totaljmlh_jasa", totalJmlhJasa);
 
         // Masukkan data ke dalam tabel 'detail_order'
         db.insert("detail_order", null, values);
 
         // Tutup koneksi database
+        db.close();
+    }
+    @SuppressLint("Range")
+    public String getDetailOrderByIdOrder(int orderId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String result = "";
+
+        // Query untuk mendapatkan detail_order berdasarkan id_order
+        String query = "SELECT * FROM detail_order WHERE id_order = " + orderId;
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                // Ambil nilai dari setiap kolom
+                String namaJasa = cursor.getString(cursor.getColumnIndex("nama_jasa"));
+                int hargaJasa = cursor.getInt(cursor.getColumnIndex("harga_jasa"));
+                int jumlah = cursor.getInt(cursor.getColumnIndex("jumlah"));
+                int totalJumlahJasa = cursor.getInt(cursor.getColumnIndex("totaljmlh_jasa"));
+
+                // Format string dengan informasi yang diambil
+                String detailInfo = namaJasa + " x" + jumlah + " \t=" + totalJumlahJasa + "\n";
+
+                // Tambahkan ke hasil akhir
+                result += detailInfo;
+
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+        return result;
+    }
+
+    public void ubahStatusPesanan(int orderId, String newStatus) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("status", newStatus);
+
+        db.update("\"order\"", values, "id=?", new String[]{String.valueOf(orderId)});
+
         db.close();
     }
 
@@ -133,10 +206,11 @@ public class DataHelper extends SQLiteOpenHelper {
             do {
                 int orderId = cursor.getInt(cursor.getColumnIndex("id"));
                 String tanggalOrder = cursor.getString(cursor.getColumnIndex("tanggal_order"));
+                int totalHarga = cursor.getInt(cursor.getColumnIndex("total_harga"));
                 String status = cursor.getString(cursor.getColumnIndex("status"));
 
                 // Buat objek Order dan tambahkan ke daftar
-                Order order = new Order(orderId, userId, tanggalOrder, status);
+                Order order = new Order(orderId, userId, tanggalOrder, totalHarga, status);
                 orderList.add(order);
             } while (cursor.moveToNext());
         }
@@ -144,9 +218,36 @@ public class DataHelper extends SQLiteOpenHelper {
         // Tutup cursor dan koneksi database
         cursor.close();
         db.close();
-
         return orderList;
     }
+
+    @SuppressLint("Range")
+    public List<Order> getAllPesanan() {
+        List<Order> pesananList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // Define the columns you want to retrieve
+        String[] columns = {"id", "id_user", "tanggal_order", "total_harga","status"};
+
+        Cursor cursor = db.query("\"order\"", columns, null, null, null, null, null);
+
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(cursor.getColumnIndex("id"));
+            int userId = cursor.getInt(cursor.getColumnIndex("id_user"));
+            String tanggalOrder = cursor.getString(cursor.getColumnIndex("tanggal_order"));
+            int totalHarga = cursor.getInt(cursor.getColumnIndex("total_harga"));
+            String status = cursor.getString(cursor.getColumnIndex("status"));
+
+            Order order = new Order(id, userId, tanggalOrder, totalHarga, status);
+            pesananList.add(order);
+        }
+
+        cursor.close();
+        db.close();
+
+        return pesananList;
+    }
+
 
     @SuppressLint("Range")
     public Order getPesananById(int orderId) {
@@ -161,10 +262,11 @@ public class DataHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             int userId = cursor.getInt(cursor.getColumnIndex("id_user"));
             String tanggalOrder = cursor.getString(cursor.getColumnIndex("tanggal_order"));
+            int totalHarga = cursor.getInt(cursor.getColumnIndex("total_harga"));
             String status = cursor.getString(cursor.getColumnIndex("status"));
 
             // Buat objek Order
-            order = new Order(orderId, userId, tanggalOrder, status);
+            order = new Order(orderId, userId, tanggalOrder, totalHarga, status);
         }
 
         // Tutup cursor dan koneksi database
@@ -247,7 +349,7 @@ public class DataHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             int id = cursor.getInt(cursor.getColumnIndex("id"));
             String nama = cursor.getString(cursor.getColumnIndex("nama"));
-            double harga = cursor.getDouble(cursor.getColumnIndex("harga"));
+            int harga = cursor.getInt(cursor.getColumnIndex("harga"));
 
             jasa = new Jasa(id, nama, harga);
             // Add other properties if needed
@@ -273,7 +375,7 @@ public class DataHelper extends SQLiteOpenHelper {
         while (cursor.moveToNext()) {
             int id = cursor.getInt(cursor.getColumnIndex("id"));
             String nama = cursor.getString(cursor.getColumnIndex("nama"));
-            double harga = cursor.getDouble(cursor.getColumnIndex("harga"));
+            int harga = cursor.getInt(cursor.getColumnIndex("harga"));
 
             Jasa jasa = new Jasa(id, nama, harga);
             jasaList.add(jasa);
@@ -284,31 +386,6 @@ public class DataHelper extends SQLiteOpenHelper {
 
         return jasaList;
     }
-
-    @SuppressLint("Range")
-    public List<DetailOrder> getDetailPesananByOrderId(int orderId) {
-        List<DetailOrder> detailOrderList = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        String query = "SELECT * FROM detail_order WHERE id_order = ?";
-        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(orderId)});
-
-        try {
-            while (cursor.moveToNext()) {
-                DetailOrder detailOrder = new DetailOrder();
-                detailOrder.setIdJasa(cursor.getInt(cursor.getColumnIndex("id_jasa")));
-                detailOrder.setJumlah(cursor.getInt(cursor.getColumnIndex("jumlah")));
-
-                detailOrderList.add(detailOrder);
-            }
-        } finally {
-            cursor.close();
-        }
-        db.close();
-        return detailOrderList;
-    }
-
-
 
     public boolean insertJasa(String nama, double harga, int storeId) {
         SQLiteDatabase db = this.getWritableDatabase();

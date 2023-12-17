@@ -7,12 +7,14 @@ public class Order {
     private long id;
     private int userId;
     private String tanggalOrder;
+    private int totalharga;
     private String status;
 
-    public Order(long id, int userId, String tanggalOrder, String status) {
+    public Order(long id, int userId, String tanggalOrder, int totalharga, String status) {
         this.id = id;
         this.userId = userId;
         this.tanggalOrder = tanggalOrder;
+        this.totalharga = totalharga;
         this.status = status;
     }
 
@@ -21,6 +23,12 @@ public class Order {
     }
     public void setId(int id) {
         this.id = id;
+    }
+    public long getTotalHarga() {
+        return totalharga;
+    }
+    public void setTotalHarga(int totalharga) {
+        this.totalharga = totalharga;
     }
 
     public int getUserId() {

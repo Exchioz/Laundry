@@ -1,4 +1,4 @@
-package com.example.laundry;
+package com.example.laundry.Users;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.laundry.DataHelper;
+import com.example.laundry.R;
+import com.example.laundry.User;
 
 public class EditProfileActivity extends AppCompatActivity {
 

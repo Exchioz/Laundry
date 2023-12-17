@@ -1,8 +1,10 @@
-package com.example.laundry;
+package com.example.laundry.Store;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.laundry.R;
 
 public class EditStoreActivity extends AppCompatActivity {
 

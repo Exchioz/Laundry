@@ -1,4 +1,4 @@
-package com.example.laundry;
+package com.example.laundry.Users.Pesanan;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,14 +9,12 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.List;
+import com.example.laundry.DataHelper;
+import com.example.laundry.Order;
+import com.example.laundry.R;
 
 public class DetailViewOrder extends AppCompatActivity {
-
-    private TextView orderIdTextView;
-    private TextView orderDateTextView;
-    private TextView orderStatusTextView;
-    private TextView itemInfoTextView;
+    private TextView orderIdTextView,orderDateTextView, orderStatusTextView, itemInfoTextView, orderTotalTextView;
     Button btnBack;
     private DataHelper dbHelper;
     private int userId;
@@ -29,6 +27,7 @@ public class DetailViewOrder extends AppCompatActivity {
         // Inisialisasi komponen UI
         orderIdTextView = findViewById(R.id.textViewOrderId);
         orderDateTextView = findViewById(R.id.textViewOrderDate);
+        orderTotalTextView = findViewById(R.id.textViewOrderTotalHarga);
         orderStatusTextView = findViewById(R.id.textViewOrderStatus);
         itemInfoTextView = findViewById(R.id.textViewItemInfo);
         btnBack = findViewById(R.id.btnBack);
@@ -60,26 +59,10 @@ public class DetailViewOrder extends AppCompatActivity {
 
         orderIdTextView.setText("ID Pesanan: " + order.getId());
         orderDateTextView.setText("Tanggal Order: " + order.getTanggalOrder());
+        orderTotalTextView.setText("Total Harga: " + order.getTotalHarga());
         orderStatusTextView.setText("Status: " + order.getStatus());
 
-        List<DetailOrder> detailOrderList = dbHelper.getDetailPesananByOrderId(orderId);
-
-        StringBuilder itemInfoBuilder = new StringBuilder("Detail Item:\n");
-        Jasa jasa;
-        DetailOrder detailOrder;
-
-        for (int i = 0; i < detailOrderList.size(); i++) {
-            detailOrder = detailOrderList.get(i);
-            jasa = dbHelper.getJasaById(detailOrder.getIdJasa());
-
-            itemInfoBuilder.append("- ").append(jasa.getNama())
-                    .append(", Jumlah: ").append(detailOrder.getJumlah())
-                    .append("\n");
-            System.out.println("idJasa: " + jasa);
-        }
-
-
-        // Tampilkan informasi item pada TextView
-        itemInfoTextView.setText(itemInfoBuilder.toString());
+        String detailOrderInfo = dbHelper.getDetailOrderByIdOrder(orderId);
+        itemInfoTextView.setText(detailOrderInfo);
     }
 }

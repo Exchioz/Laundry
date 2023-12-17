@@ -1,4 +1,4 @@
-package com.example.laundry;
+package com.example.laundry.Store.Jasa;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.laundry.DataHelper;
+import com.example.laundry.Jasa;
+import com.example.laundry.R;
 
 public class EditJasaActivity extends AppCompatActivity {
 

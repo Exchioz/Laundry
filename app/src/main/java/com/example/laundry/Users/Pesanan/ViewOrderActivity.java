@@ -1,4 +1,4 @@
-package com.example.laundry;
+package com.example.laundry.Users.Pesanan;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.example.laundry.DataHelper;
+import com.example.laundry.Order;
+import com.example.laundry.R;
+import com.example.laundry.Users.MainActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +23,8 @@ public class ViewOrderActivity extends AppCompatActivity {
     private ListView listViewPesanan;
     private List<String> pesananList;
     private ArrayAdapter<String> adapter;
+
+    Button btnBack;
 
     private DataHelper dbHelper;
     private int userId;
@@ -32,6 +39,7 @@ public class ViewOrderActivity extends AppCompatActivity {
 
         // Inisialisasi komponen UI
         listViewPesanan = findViewById(R.id.listViewPesanan);
+        btnBack = findViewById(R.id.buttonKembali);
         pesananList = new ArrayList<>();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, pesananList);
         listViewPesanan.setAdapter(adapter);
@@ -57,16 +65,27 @@ public class ViewOrderActivity extends AppCompatActivity {
             }
         });
 
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Tambahkan pesanan ke database
+                Intent orderview = new Intent(ViewOrderActivity.this, MainActivity.class);
+                startActivity(orderview);
+                finish();
+            }
+        });
+
     }
 
     private void tampilkanPesananByUserId(int userId) {
         List<Order> orderList = dbHelper.getPesananByUserId(userId);
 
-        pesananList.clear(); // Membersihkan daftar sebelum menambahkan pesanan baru
+        pesananList.clear();
 
         for (Order order : orderList) {
             String pesananInfo = "ID Pesanan: " + order.getId() +
                     "\nTanggal Order: " + order.getTanggalOrder() +
+                    "\nTotal Harga: " + order.getTotalHarga() +
                     "\nStatus: " + order.getStatus();
 
             pesananList.add(pesananInfo);

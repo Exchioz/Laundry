@@ -1,4 +1,4 @@
-package com.example.laundry;
+package com.example.laundry.Users;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -11,6 +11,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.laundry.DataHelper;
+import com.example.laundry.R;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -76,7 +79,7 @@ public class SignupActivity extends AppCompatActivity {
         btnsingin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 try {
-                    Intent sign_in = new Intent(getApplicationContext(), com.example.laundry.LoginActivity.class);
+                    Intent sign_in = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(sign_in);
                 } catch (Exception e) {
                     e.printStackTrace();

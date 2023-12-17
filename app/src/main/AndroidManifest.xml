@@ -13,61 +13,49 @@
         android:theme="@style/Theme.Laundry"
         tools:targetApi="31">
         <activity
-            android:name=".DetailViewOrder"
-            android:exported="false" />
-        <activity
-            android:name=".ViewOrderAdapter"
+            android:name=".Users.Pesanan.DetailViewOrder"
             android:exported="false" />
         <activity
             android:name=".Order"
             android:exported="false" />
         <activity
-            android:name=".ViewOrderActivity"
+            android:name=".Users.Pesanan.ViewOrderActivity"
             android:exported="false" />
         <activity
-            android:name=".KonfirmasiPemesananActivity"
+            android:name=".Store.Jasa.JasaOrderAdapter"
             android:exported="false" />
         <activity
-            android:name=".JasaOrderAdapter"
+            android:name=".Users.Pesanan.OrderJasaActivity"
             android:exported="false" />
         <activity
-            android:name=".JasaOrderActivity"
+            android:name=".Store.EditStoreActivity"
             android:exported="false" />
         <activity
-            android:name=".OrderJasaActivity"
+            android:name=".Store.SingupStoreActivity"
             android:exported="false" />
         <activity
-            android:name=".JasaUserActivity"
+            android:name=".Store.LoginStoreActivity"
             android:exported="false" />
         <activity
-            android:name=".EditStoreActivity"
+            android:name=".Store.Jasa.EditJasaActivity"
             android:exported="false" />
         <activity
-            android:name=".SingupStoreActivity"
+            android:name=".Store.Pesanan.ViewPesananActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginStoreActivity"
+            android:name=".Store.Jasa.JasaActivity"
             android:exported="false" />
         <activity
-            android:name=".EditJasaActivity"
+            android:name=".Store.Jasa.AddJasaActivity"
             android:exported="false" />
         <activity
-            android:name=".EditJavaActivity"
+            android:name=".Store.StoreActivity"
             android:exported="false" />
         <activity
-            android:name=".JasaActivity"
+            android:name=".Users.EditProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".AddJasaActivity"
-            android:exported="false" />
-        <activity
-            android:name=".StoreActivity"
-            android:exported="false" />
-        <activity
-            android:name=".EditProfileActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SignupActivity"
+            android:name=".Users.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -75,8 +63,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".Store.Pesanan.DetailViewPesanan" />
+        <activity
+            android:name=".Users.SignupActivity" />
+        <activity android:name=".Users.MainActivity" />
     </application>
 
 </manifest>

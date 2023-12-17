@@ -1,4 +1,4 @@
-package com.example.laundry;
+package com.example.laundry.Users.Pesanan;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,12 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.laundry.DataHelper;
+import com.example.laundry.Jasa;
+import com.example.laundry.R;
+import com.example.laundry.Store.Jasa.JasaOrderAdapter;
+import com.example.laundry.Users.MainActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -47,8 +53,6 @@ public class OrderJasaActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Jasa selectedJasa = jasaList.get(position);
-                // Handle item click, misalnya tambahkan atau kurangi jumlah
-                // Anda juga bisa menampilkan dialog atau aktivitas lain untuk mengonfirmasi pesanan
                 Toast.makeText(OrderJasaActivity.this, "Anda memilih jasa: " + selectedJasa.getNama(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -59,7 +63,7 @@ public class OrderJasaActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Tambahkan pesanan ke database
                 DataHelper dbHelper = new DataHelper(OrderJasaActivity.this);
-                dbHelper.tambahPesanan(userId, getCurrentDate(), "PENDING", jasaList, jasaOrderAdapter.getJumlahList());
+                dbHelper.tambahPesanan(userId, getCurrentDate(), jasaOrderAdapter.hitungTotalHarga(), "PENDING", jasaList, jasaOrderAdapter.getJumlahList());
                 // Buka aktivitas konfirmasi pemesanan
                 Intent orderview = new Intent(OrderJasaActivity.this, MainActivity.class);
                 orderview.putExtra("USER_ID", userId);

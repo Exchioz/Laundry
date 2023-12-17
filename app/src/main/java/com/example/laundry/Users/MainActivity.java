@@ -1,4 +1,4 @@
-package com.example.laundry;
+package com.example.laundry.Users;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.laundry.DataHelper;
+import com.example.laundry.Users.Pesanan.OrderJasaActivity;
+import com.example.laundry.R;
+import com.example.laundry.Users.Pesanan.ViewOrderActivity;
 
 public class MainActivity extends AppCompatActivity {
     private DataHelper dbHelper;
@@ -63,6 +68,17 @@ public class MainActivity extends AppCompatActivity {
                     Intent viewIntent = new Intent(MainActivity.this, ViewOrderActivity.class);
                     viewIntent.putExtra("USER_ID", userId);
                     startActivity(viewIntent);
+                }
+            });
+
+            Button btnLogout = findViewById(R.id.btnLogout);
+            btnLogout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
                 }
             });
         } else {

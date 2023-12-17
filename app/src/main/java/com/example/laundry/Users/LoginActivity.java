@@ -1,18 +1,19 @@
-package com.example.laundry;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.laundry.Users;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.laundry.DataHelper;
+import com.example.laundry.R;
+import com.example.laundry.Store.LoginStoreActivity;
+import com.example.laundry.User;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -61,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
         btnsignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent sign_up = new Intent(getApplicationContext(), com.example.laundry.SignupActivity.class);
+                Intent sign_up = new Intent(getApplicationContext(), SignupActivity.class);
                 startActivity(sign_up);
             }
         });
@@ -69,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
         btnstore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent loginstore = new Intent(getApplicationContext(), com.example.laundry.LoginStoreActivity.class);
+                Intent loginstore = new Intent(getApplicationContext(), LoginStoreActivity.class);
                 startActivity(loginstore);
             }
         });

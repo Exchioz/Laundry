@@ -1,4 +1,4 @@
-package com.example.laundry;
+package com.example.laundry.Store.Jasa;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.example.laundry.Jasa;
+import com.example.laundry.R;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -80,5 +83,17 @@ public class JasaOrderAdapter extends ArrayAdapter<Jasa> {
 
     public List<Integer> getJumlahList() {
         return jumlahList;
+    }
+
+    public int hitungTotalHarga() {
+        double totalHarga = 0.0;
+
+        for (int i = 0; i < jasas.size(); i++) {
+            Jasa jasa = jasas.get(i);
+            int jumlah = jumlahList.get(i);
+            totalHarga += jasa.getHarga() * jumlah;
+        }
+
+        return (int) totalHarga;
     }
 }

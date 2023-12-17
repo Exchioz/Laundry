@@ -1,24 +1,24 @@
-package com.example.laundry;
+package com.example.laundry.Store;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.laundry.DataHelper;
+import com.example.laundry.Users.LoginActivity;
+import com.example.laundry.R;
 
 public class LoginStoreActivity extends AppCompatActivity {
 
     protected Cursor cursor;
     DataHelper dbHelper;
-    Button btnlogin, btnsignup, btnstore;
+    Button btnlogin, btnstore;
     EditText username, password;
 
 
@@ -31,7 +31,6 @@ public class LoginStoreActivity extends AppCompatActivity {
         username = findViewById(R.id.etUsername);
         password = findViewById(R.id.etPassword);
         btnlogin = findViewById(R.id.btnLogin);
-        btnsignup = findViewById(R.id.btnSignup);
         btnstore = findViewById(R.id.btnLoginUser);
 
         btnlogin.setOnClickListener(new View.OnClickListener() {
@@ -57,18 +56,10 @@ public class LoginStoreActivity extends AppCompatActivity {
             }
         });
 
-        btnsignup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent sign_up = new Intent(getApplicationContext(), com.example.laundry.SingupStoreActivity.class);
-                startActivity(sign_up);
-            }
-        });
-
         btnstore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent loginuser = new Intent(getApplicationContext(), com.example.laundry.LoginActivity.class);
+                Intent loginuser = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(loginuser);
             }
         });

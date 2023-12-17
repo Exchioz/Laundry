@@ -13,6 +13,12 @@
         android:text="ID Pesanan: " />
 
     <TextView
+        android:id="@+id/textViewNama"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nama: " />
+
+    <TextView
         android:id="@+id/textViewOrderDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,6 +41,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Detail Item: " />
+
+    <Button
+        android:id="@+id/btnUbah"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ubah Status" />
+
+    <Button
+        android:id="@+id/btnEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Edit Item" />
+
+    <Button
+        android:id="@+id/btnBatal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:text="Batal" />
 
     <Button
         android:id="@+id/btnBack"

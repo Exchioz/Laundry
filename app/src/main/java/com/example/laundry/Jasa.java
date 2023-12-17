@@ -4,9 +4,9 @@ public class Jasa {
 
     private int id;
     private String nama;
-    private double harga;
+    private int harga;
 
-    public Jasa(int id, String nama, double harga) {
+    public Jasa(int id, String nama, int harga) {
         this.id = id;
         this.nama = nama;
         this.harga = harga;
@@ -28,11 +28,11 @@ public class Jasa {
         this.nama = nama;
     }
 
-    public double getHarga() {
+    public int getHarga() {
         return harga;
     }
 
-    public void setHarga(double harga) {
+    public void setHarga(int harga) {
         this.harga = harga;
     }
 }

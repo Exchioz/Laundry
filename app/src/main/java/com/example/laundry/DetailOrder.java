@@ -3,8 +3,19 @@ package com.example.laundry;
 public class DetailOrder {
     private int id;
     private static int idOrder;
-    private static int idJasa;
+    private static String nama;
+    private static int harga;
     private static int jumlah;
+    private static int totalHarga;
+
+    public DetailOrder (int id, int orderId, String nama, int harga, int jumlah, int totalHarga){
+        this.id = id;
+        this.idOrder = orderId;
+        this.nama = nama;
+        this.harga = harga;
+        this.jumlah = jumlah;
+        this.totalHarga = totalHarga;
+    }
 
 
     public int getId() {
@@ -19,15 +30,8 @@ public class DetailOrder {
         this.id = id;
     }
 
-    public void setIdJasa(int idJasa) {
-        this.idJasa = idJasa;
-    }
-
     public static int getJumlah() {
         return jumlah;
-    }
-    public static int getIdJasa() {
-        return idJasa;
     }
 
     public void setJumlah(int jumlah) {
