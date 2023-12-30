@@ -4,37 +4,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/centre_background"
     android:padding="16dp">
 
     <TextView
         android:id="@+id/textViewOrderId"
-        android:layout_width="wrap_content"
+        android:layout_width="108dp"
         android:layout_height="wrap_content"
-        android:text="ID Pesanan: " />
+        android:text="ID Pesanan      : " />
 
     <TextView
         android:id="@+id/textViewOrderDate"
-        android:layout_width="wrap_content"
+        android:layout_width="109dp"
         android:layout_height="wrap_content"
-        android:text="Tanggal Order: " />
+        android:text="Tanggal Order : " />
 
     <TextView
         android:id="@+id/textViewOrderStatus"
-        android:layout_width="wrap_content"
+        android:layout_width="112dp"
         android:layout_height="wrap_content"
-        android:text="Status: " />
+        android:text="Status               : " />
 
     <TextView
         android:id="@+id/textViewOrderTotalHarga"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Total Harga: Rp. " />
+        android:text="Total Harga     : Rp. " />
 
     <TextView
         android:id="@+id/textViewItemInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Detail Item: " />
+        android:text="Detail Item      : " />
 
     <Button
         android:id="@+id/btnBack"
