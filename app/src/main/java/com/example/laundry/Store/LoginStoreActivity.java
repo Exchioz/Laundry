@@ -44,14 +44,11 @@ public class LoginStoreActivity extends AppCompatActivity {
                 } else {
                     int storeId = dbHelper.getStoreIdByUsername(usern); // Assuming you have a method to get user ID
                     if (isCredentialsValid(usern, passw)) {
-                        Toast.makeText(LoginStoreActivity.this, "Login berhasil, Selamat datang di Toko" + storeId, Toast.LENGTH_LONG).show();
-                        Intent editStoreIntent = new Intent(LoginStoreActivity.this, EditStoreActivity.class);
-                        editStoreIntent.putExtra("STORE_ID", storeId); // Mengirim ID toko
+                        String toko = dbHelper.getNamaStoreById(storeId);
+                        Toast.makeText(LoginStoreActivity.this, "Selamat datang di Toko " + toko, Toast.LENGTH_LONG).show();
+                        Intent editStoreIntent = new Intent(LoginStoreActivity.this, StoreActivity.class);
+                        editStoreIntent.putExtra("USER_ID", storeId); // Mengirim ID toko
                         startActivity(editStoreIntent);
-                        finish();
-                        Intent storeIntent = new Intent(LoginStoreActivity.this, StoreActivity.class);
-                        storeIntent.putExtra("USER_ID", storeId);
-                        startActivity(storeIntent);
                         finish();
                     } else {
                         Toast.makeText(LoginStoreActivity.this, "Username atau password salah", Toast.LENGTH_SHORT).show();

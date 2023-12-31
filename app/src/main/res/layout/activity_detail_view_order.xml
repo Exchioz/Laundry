@@ -37,10 +37,4 @@
         android:layout_height="wrap_content"
         android:text="Detail Item      : " />
 
-    <Button
-        android:id="@+id/btnBack"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Kembali" />
-
 </LinearLayout>

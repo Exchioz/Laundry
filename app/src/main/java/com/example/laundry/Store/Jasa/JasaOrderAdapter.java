@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -44,8 +46,8 @@ public class JasaOrderAdapter extends ArrayAdapter<Jasa> {
         TextView textViewJasaName = convertView.findViewById(R.id.textViewJasaNameOrder);
         TextView textViewJasaPrice = convertView.findViewById(R.id.textViewJasaPriceOrder);
         TextView textViewJasaCount = convertView.findViewById(R.id.textViewJasaCount);
-        Button btnDecrease = convertView.findViewById(R.id.btnDecrease);
-        Button btnIncrease = convertView.findViewById(R.id.btnIncrease);
+        ImageButton btnDecrease = convertView.findViewById(R.id.btnDecrease);
+        ImageButton btnIncrease = convertView.findViewById(R.id.btnIncrease);
 
         if (jasa != null) {
             textViewJasaName.setText(jasa.getNama());

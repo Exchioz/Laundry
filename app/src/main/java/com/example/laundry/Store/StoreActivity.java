@@ -41,8 +41,6 @@ public class StoreActivity extends AppCompatActivity {
             editButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // Open EditProfileActivity and pass the user ID
-                    Toast.makeText(StoreActivity.this, "Mengedit " + userId, Toast.LENGTH_LONG).show();
                     Intent editIntent = new Intent(StoreActivity.this, EditStoreActivity.class);
                     editIntent.putExtra("USER_ID", userId);
                     startActivity(editIntent);

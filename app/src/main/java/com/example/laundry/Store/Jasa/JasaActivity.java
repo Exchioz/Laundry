@@ -12,9 +12,6 @@ import android.widget.ListView;
 import com.example.laundry.DataHelper;
 import com.example.laundry.Jasa;
 import com.example.laundry.R;
-import com.example.laundry.Store.StoreActivity;
-import com.example.laundry.Users.Pesanan.DetailViewOrder;
-import com.example.laundry.Users.Pesanan.ViewOrderActivity;
 
 public class JasaActivity extends AppCompatActivity {
 
@@ -22,7 +19,7 @@ public class JasaActivity extends AppCompatActivity {
     private JasaAdapter jasaAdapter;
     private DataHelper dbHelper;
 
-    private Button btnTambahJasa, btnBack;
+    private Button btnTambahJasa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +29,6 @@ public class JasaActivity extends AppCompatActivity {
         dbHelper = new DataHelper(this);
         listViewJasa = findViewById(R.id.listViewJasa);
         btnTambahJasa = findViewById(R.id.btnTambah);
-        btnBack = findViewById(R.id.btnBack);
 
         // Setup adapter for the ListView
         jasaAdapter = new JasaAdapter(this, dbHelper.getAllJasa());
@@ -64,16 +60,6 @@ public class JasaActivity extends AppCompatActivity {
                 // Handle click event, e.g., open activity to add a new jasa
                 Intent intent = new Intent(JasaActivity.this, AddJasaActivity.class);
                 startActivity(intent);
-            }
-        });
-
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Tambahkan pesanan ke database
-                Intent orderview = new Intent(JasaActivity.this, StoreActivity.class);
-                startActivity(orderview);
-                finish();
             }
         });
     }

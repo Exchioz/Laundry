@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.laundry.DataHelper;
 import com.example.laundry.R;
 import com.example.laundry.Store.LoginStoreActivity;
-import com.example.laundry.User;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -52,8 +51,8 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     int userId = dbHelper.getUserIdByUsername(usern); // Assuming you have a method to get user ID
                     if (isCredentialsValid(usern, passw)) {
-                        User user = dbHelper.getUserByID(userId);
-                        Toast.makeText(LoginActivity.this, "Login berhasil, Selamat datang " + userId, Toast.LENGTH_LONG).show();
+                        String user = dbHelper.getNamaById(userId);
+                        Toast.makeText(LoginActivity.this, "Selamat datang " + user, Toast.LENGTH_LONG).show();
                         Intent login = new Intent(LoginActivity.this, MainActivity.class);
                         login.putExtra("USER_ID", userId);
                         startActivity(login);

@@ -50,16 +50,13 @@ public class DataHelper extends SQLiteOpenHelper {
                 "notelp_toko integer null, " +
                 "email_toko text null, " +
                 "alamat_toko text null, " +
-                "info_toko text null, " +
-                "hariop_toko text null, " +
-                "waktuop_toko text null," +
                 "CONSTRAINT unique_usernamestore UNIQUE(username)" +
                 ");";
         Log.d("data", "onCreate" + store);
         db.execSQL(store);
 
-        db.execSQL("INSERT INTO store (username, password, nama_toko, notelp_toko, email_toko, alamat_toko, info_toko, hariop_toko, waktuop_toko) " +
-                "VALUES ('admin', 'admin123', 'Toko Saya', 123456789, 'tokosaya@email.com', 'Jl. Contoh No. 123', 'Informasi tambahan', 'Senin - Jumat', '08:00 - 17:00');");
+        db.execSQL("INSERT INTO store (username, password, nama_toko, notelp_toko, email_toko, alamat_toko) " +
+                "VALUES ('admin', 'admin123', 'Toko Saya', 123456789, 'tokosaya@email.com', 'Jl. Contoh No. 123');");
 
         String order = "create table \"order\"(id integer primary key, " +
                 "id_user integer null, " +
@@ -167,7 +164,7 @@ public class DataHelper extends SQLiteOpenHelper {
                 int totalJumlahJasa = cursor.getInt(cursor.getColumnIndex("totaljmlh_jasa"));
 
                 // Format string dengan informasi yang diambil
-                String detailInfo = namaJasa + " x" + jumlah + " \t=" + totalJumlahJasa + "\n";
+                String detailInfo = namaJasa + "   x" + jumlah + " \t\t= Rp." + totalJumlahJasa + "\n";
 
                 // Tambahkan ke hasil akhir
                 result += detailInfo;
@@ -311,6 +308,23 @@ public class DataHelper extends SQLiteOpenHelper {
         return nama;
     }
 
+    public String getNamaStoreById(int userId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String nama = ""; // Default value if not found
+
+        String query = "SELECT nama_toko FROM store WHERE id = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(userId)});
+
+        if (cursor.moveToFirst()) {
+            nama = cursor.getString(0);
+        }
+
+        cursor.close();
+        db.close();
+
+        return nama;
+    }
+
     @SuppressLint("Range")
     public User getUserByID(int userID) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -334,6 +348,31 @@ public class DataHelper extends SQLiteOpenHelper {
         db.close();
 
         return user;
+    }
+
+    @SuppressLint("Range")
+    public Toko getStoreByID(int storeID) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Toko toko = null;
+
+        String query = "SELECT * FROM store WHERE id = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(storeID)});
+
+        if (cursor.moveToFirst()) {
+            toko = new Toko();
+            toko.setId(cursor.getInt(cursor.getColumnIndex("id")));
+            toko.setUsername(cursor.getString(cursor.getColumnIndex("username")));
+            toko.setPassword(cursor.getString(cursor.getColumnIndex("password")));
+            toko.setNama(cursor.getString(cursor.getColumnIndex("nama_toko")));
+            toko.setNoTlp(cursor.getString(cursor.getColumnIndex("notelp_toko")));
+            toko.setEmail(cursor.getString(cursor.getColumnIndex("email_toko")));
+            toko.setAlamat(cursor.getString(cursor.getColumnIndex("alamat_toko")));
+        }
+
+        cursor.close();
+        db.close();
+
+        return toko;
     }
 
     @SuppressLint("Range")
@@ -511,6 +550,22 @@ public class DataHelper extends SQLiteOpenHelper {
         contentValues.put("alamat", newAlamat);
 
         int rowsAffected = db.update("user", contentValues, "id=?", new String[]{String.valueOf(userID)});
+        db.close();
+
+        return rowsAffected > 0;
+    }
+
+    public boolean updateDataStore(int userID, String newUsername, String newPassword, String newNama, String newNomerTlp, String newEmail, String newAlamat) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("username", newUsername);
+        contentValues.put("password", newPassword);
+        contentValues.put("nama_toko", newNama);
+        contentValues.put("notelp_toko", newNomerTlp);
+        contentValues.put("email_toko", newEmail);
+        contentValues.put("alamat_toko", newAlamat);
+
+        int rowsAffected = db.update("store", contentValues, "id=?", new String[]{String.valueOf(userID)});
         db.close();
 
         return rowsAffected > 0;

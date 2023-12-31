@@ -38,7 +38,6 @@ public class DetailViewPesanan extends AppCompatActivity {
         orderStatusTextView = findViewById(R.id.textViewOrderStatus);
         itemInfoTextView = findViewById(R.id.textViewItemInfo);
         btnUbahStatus = findViewById(R.id.btnUbah);
-        btnBack = findViewById(R.id.btnBack);
         btnBatal = findViewById(R.id.btnBatal);
         btnEdit = findViewById(R.id.btnEdit);
 
@@ -105,16 +104,6 @@ public class DetailViewPesanan extends AppCompatActivity {
                 }
             }
         });
-
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Tambahkan pesanan ke database
-                Intent orderview = new Intent(DetailViewPesanan.this, ViewPesananActivity.class);
-                startActivity(orderview);
-                finish();
-            }
-        });
     }
 
     private void tampilkanDetailPesanan(int orderId) {
@@ -123,7 +112,7 @@ public class DetailViewPesanan extends AppCompatActivity {
         orderIdTextView.setText("ID Pesanan: " + order.getId());
         orderNamaTextView.setText("Nama: " + dbHelper.getNamaById(order.getUserId()));
         orderDateTextView.setText("Tanggal Order: " + order.getTanggalOrder());
-        orderTotalTextView.setText("Total Harga: " + order.getTotalHarga());
+        orderTotalTextView.setText("Total Harga: Rp." + order.getTotalHarga());
         orderStatusTextView.setText("Status: " + order.getStatus());
 
         String detailOrderInfo = dbHelper.getDetailOrderByIdOrder(orderId);

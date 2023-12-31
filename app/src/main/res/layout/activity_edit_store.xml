@@ -4,7 +4,192 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/centre_background"
-    tools:context=".Store.EditStoreActivity">
+    android:layout_gravity="center"
+    android:background="@drawable/centre_background">
+
+
+    <ImageView
+        android:id="@+id/imageViewep2"
+        android:layout_width="372dp"
+        android:layout_height="430dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.279"
+        app:srcCompat="@drawable/background_edituser" />
+
+    <ImageView
+        android:id="@+id/imageView_ep6"
+        android:layout_width="292dp"
+        android:layout_height="123dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.125"
+        app:srcCompat="@drawable/form_username" />
+
+    <ImageView
+        android:id="@+id/imageViewep3"
+        android:layout_width="292dp"
+        android:layout_height="123dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.325"
+        app:srcCompat="@drawable/form_namalengkap" />
+
+    <ImageView
+        android:id="@+id/imageViewep4"
+        android:layout_width="292dp"
+        android:layout_height="123dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.225"
+        app:srcCompat="@drawable/form_password" />
+
+    <ImageView
+        android:id="@+id/imageView_ep5"
+        android:layout_width="292dp"
+        android:layout_height="123dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.425"
+        app:srcCompat="@drawable/form_telepon" />
+
+    <ImageView
+        android:id="@+id/imageViewep10"
+        android:layout_width="292dp"
+        android:layout_height="123dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.525"
+        app:srcCompat="@drawable/form_email" />
+
+    <ImageView
+        android:id="@+id/imageViewep11"
+        android:layout_width="292dp"
+        android:layout_height="123dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.625"
+        app:srcCompat="@drawable/form_alamat" />
+
+    <EditText
+        android:id="@+id/etUsername"
+        android:layout_width="207dp"
+        android:layout_height="57dp"
+        android:ems="10"
+        android:hint="Username"
+        android:inputType="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@null"
+        app:layout_constraintVertical_bias="0.161"
+        app:layout_constraintHorizontal_bias="0.550" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="207dp"
+        android:layout_height="57dp"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@null"
+        app:layout_constraintVertical_bias="0.250"
+        app:layout_constraintHorizontal_bias="0.550" />
+
+    <EditText
+        android:id="@+id/etNama"
+        android:layout_width="207dp"
+        android:layout_height="57dp"
+        android:ems="10"
+        android:hint="Nama Lengkap"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@null"
+        app:layout_constraintVertical_bias="0.339"
+        app:layout_constraintHorizontal_bias="0.550" />
+
+    <EditText
+        android:id="@+id/etNoTlp"
+        android:layout_width="207dp"
+        android:layout_height="57dp"
+        android:ems="10"
+        android:hint="No Telp"
+        android:inputType="phone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@null"
+        app:layout_constraintVertical_bias="0.431"
+        app:layout_constraintHorizontal_bias="0.550" />
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="207dp"
+        android:layout_height="57dp"
+        android:background="@null"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.521"
+        app:layout_constraintHorizontal_bias="0.550" />
+
+    <EditText
+        android:id="@+id/etAlamat"
+        android:layout_width="207dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Alamat"
+        android:inputType="textPostalAddress"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@null"
+        app:layout_constraintVertical_bias="0.601"
+        app:layout_constraintHorizontal_bias="0.550" />
+
+    <Button
+        android:id="@+id/btnUpdate"
+        android:layout_width="240dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="592dp"
+        android:text="Update"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     // Open EditProfileActivity and pass the user ID
-                    Toast.makeText(MainActivity.this, "Mengedit " + userId, Toast.LENGTH_LONG).show();
                     Intent editIntent = new Intent(MainActivity.this, EditProfileActivity.class);
                     editIntent.putExtra("USER_ID", userId);
                     startActivity(editIntent);

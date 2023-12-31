@@ -39,7 +39,6 @@ public class ViewOrderActivity extends AppCompatActivity {
 
         // Inisialisasi komponen UI
         listViewPesanan = findViewById(R.id.listViewPesanan);
-        btnBack = findViewById(R.id.buttonKembali);
         pesananList = new ArrayList<>();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, pesananList);
         listViewPesanan.setAdapter(adapter);
@@ -65,16 +64,6 @@ public class ViewOrderActivity extends AppCompatActivity {
             }
         });
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Tambahkan pesanan ke database
-                Intent orderview = new Intent(ViewOrderActivity.this, MainActivity.class);
-                startActivity(orderview);
-                finish();
-            }
-        });
-
     }
 
     private void tampilkanPesananByUserId(int userId) {
@@ -85,7 +74,7 @@ public class ViewOrderActivity extends AppCompatActivity {
         for (Order order : orderList) {
             String pesananInfo = "ID Pesanan: " + order.getId() +
                     "\nTanggal Order: " + order.getTanggalOrder() +
-                    "\nTotal Harga: " + order.getTotalHarga() +
+                    "\nTotal Harga: Rp." + order.getTotalHarga() +
                     "\nStatus: " + order.getStatus();
 
             pesananList.add(pesananInfo);

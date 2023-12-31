@@ -13,7 +13,6 @@ import android.widget.ListView;
 import com.example.laundry.DataHelper;
 import com.example.laundry.Order;
 import com.example.laundry.R;
-import com.example.laundry.Store.StoreActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +37,6 @@ public class ViewPesananActivity extends AppCompatActivity {
 
         // Inisialisasi komponen UI
         listViewPesanan = findViewById(R.id.listViewPesanan);
-        btnBack = findViewById(R.id.buttonKembali);
         pesananList = new ArrayList<>();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, pesananList);
         listViewPesanan.setAdapter(adapter);
@@ -58,16 +56,6 @@ public class ViewPesananActivity extends AppCompatActivity {
                 Intent intent = new Intent(ViewPesananActivity.this, DetailViewPesanan.class);
                 intent.putExtra("ORDER_ID", orderId);
                 startActivity(intent);
-            }
-        });
-
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Tambahkan pesanan ke database
-                Intent orderview = new Intent(ViewPesananActivity.this, StoreActivity.class);
-                startActivity(orderview);
-                finish();
             }
         });
 

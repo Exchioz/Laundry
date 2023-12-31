@@ -15,7 +15,7 @@ import com.example.laundry.User;
 public class EditProfileActivity extends AppCompatActivity {
 
     private DataHelper dbHelper;
-    private EditText editTextID, editTextUsername, editTextPassword, editTextNama,
+    private EditText editTextUsername, editTextPassword, editTextNama,
             editTextNotlp, editTextEmail, editTextAlamat;
     private Button buttonUpdate, buttonBack;
     private int userID;
@@ -26,7 +26,6 @@ public class EditProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_profile);
 
         // Inisialisasi EditText
-        editTextID = findViewById(R.id.etId);
         editTextUsername = findViewById(R.id.etUsername);
         editTextPassword = findViewById(R.id.etPassword);
         editTextNama = findViewById(R.id.etNama);
@@ -36,7 +35,6 @@ public class EditProfileActivity extends AppCompatActivity {
 
         // Inisialisasi buttonUpdate
         buttonUpdate = findViewById(R.id.btnUpdate);
-        buttonBack = findViewById(R.id.btnBack);
 
         // Mendapatkan ID dari Intent
         userID = getIntent().getIntExtra("USER_ID", -1);
@@ -46,7 +44,6 @@ public class EditProfileActivity extends AppCompatActivity {
         User user = dbHelper.getUserByID(userID);
 
         // Menampilkan data di EditText
-        editTextID.setText(String.valueOf(user.getId()));
         editTextUsername.setText(user.getUsername());
         editTextPassword.setText(user.getPassword());
         editTextNama.setText(user.getNama());
@@ -59,13 +56,6 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 updateUserData();
-            }
-        });
-
-        buttonBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                backButton();
             }
         });
     }
@@ -92,13 +82,5 @@ public class EditProfileActivity extends AppCompatActivity {
         } else {
             Toast.makeText(EditProfileActivity.this, "Gagal memperbarui data", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    private void backButton(){
-        dbHelper = new DataHelper(this);
-        Intent back = new Intent(EditProfileActivity.this, MainActivity.class);
-        back.putExtra("USER_ID", userID);
-        startActivity(back);
-        finish();
     }
 }

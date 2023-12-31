@@ -13,10 +13,22 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/textViewJasaPrice"
+        android:id="@+id/textViewJasaPrice2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewJasaName"
+        android:text="Rp. "
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/textViewJasaPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btnDeleteJasa"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="-24dp"
+        android:layout_marginBottom="48dp"
+        android:layout_toEndOf="@+id/textViewJasaPrice2"
         android:text="Harga"
         android:textSize="16sp" />
 
@@ -24,14 +36,14 @@
         android:id="@+id/btnEditJasa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textViewJasaPrice"
+        android:layout_below="@id/textViewJasaPrice2"
         android:text="Edit" />
 
     <Button
         android:id="@+id/btnDeleteJasa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textViewJasaPrice"
+        android:layout_below="@id/textViewJasaPrice2"
         android:layout_toEndOf="@id/btnEditJasa"
         android:text="Hapus" />
 

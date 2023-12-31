@@ -20,10 +20,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewJasaNameOrder"
-        android:layout_marginTop="4dp"
-        android:textSize="14sp"
-        android:text="Harga: Rp 0.00"
-        android:textColor="@android:color/darker_gray"/>
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="7dp"
+        android:layout_toEndOf="@+id/textViewJasaPriceOrder2"
+        android:text="0.00"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/textViewJasaPriceOrder2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewJasaNameOrder"
+        android:layout_marginTop="7dp"
+        android:text="Rp. "
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp" />
 
     <Button
         android:id="@+id/btnIncrementOrder"
